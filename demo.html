@@ -1,0 +1,34 @@
+
+<html>
+<head>
+	<style>
+	body{
+		font-family:"Helvetica","Univers","Helvetica Neue",arial,helvetica,sans-serif;
+		font-size:22px;
+		color:#808080;
+	}
+	a{color:steelblue;
+	}
+	</style>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="./typed/index.js"></script>
+	<script src="./handsome/index.js"></script>
+	<script>
+	$(document).ready(function(){
+
+		$("#input").type(function(s){console.log(s)})
+
+		$("#results").handsome('sometimes i feel ive got to du du get away',{},function(){console.log('done')})
+		$("#results2").handsome('this tained love you\'re givin, it takes all a boy can give and sometimes i feel ive got to du du get away')
+	});
+	</script>
+</head>
+<body>
+hi
+<input id="input"/><br>
+	  <span id="results"></span><br/>
+	  <p></p>
+	  <span id="results2"></span>
+
+</body>
+</html>
