@@ -1,6 +1,6 @@
 (function($) {
 
-	$.fn.fit = function(text, options) {
+	$.fn.waist = function(text, options) {
 		text=text||this.text();
 		if(!text){return}
 		options=options||{};
