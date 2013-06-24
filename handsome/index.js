@@ -121,12 +121,16 @@
     return parts;
   };
   return bysize = function(num, options) {
-    var average, delay, i, ideal_divisor, ideal_steps, parts, time;
+    var average, delay, i, ideal_divisor, ideal_steps, max, parts, time;
     average = options.average || 100;
     time = options.time || 1200;
     delay = options.delay || 20;
+    max = options.max || 5000;
     ideal_steps = time / delay;
     ideal_divisor = average / ideal_steps;
+    if (((num / ideal_divisor) * delay) > max) {
+      ideal_divisor = (average * 1.5) / ideal_steps;
+    }
     parts = (function() {
       var _i, _results;
       _results = [];

@@ -3,7 +3,6 @@
     fraction = fraction / 100
     end = parseInt(text.length * fraction)
     text.substring 0, end
-
   render_defaults = (txt, options) ->
     options.normalize_to = options.normalise_to or txt.length
     options.normalize_to = 100
@@ -93,8 +92,11 @@
     average = options.average || 100
     time = options.time || 1200
     delay = options.delay || 20
+    max = options.max || 5000
     ideal_steps = time/delay
     ideal_divisor = average / ideal_steps
+    if ((num/ideal_divisor) * delay) > max #if it's over 5 seconds, make it slightly more than average
+      ideal_divisor = (average*1.5) / ideal_steps
     parts=(parseInt(i) for i in [0..num] by ideal_divisor)
     parts
 

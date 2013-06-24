@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>State Labs</title>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="./index.js"></script>
+ <script type="text/coffeescript">
+  $ ->
+    start = new Date().getTime();
+    haml="""
+    %h2
+      hello there
+    #fun
+      this html was generated clientside with haml
+        %b{style:"display:block; color:steelblue;"}
+          it's a baddass way to write html using
+          %a{href : 'http://coffeescript.org/#strings'} coffeescript string templating
+    """
+    $("#main").haml(haml)
+    end = new Date().getTime();
+    time = end - start;
+    $("#main").append('<P>compiled in: ' + time+"ms");
+ </script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.1.2/coffee-script.min.js"></script>
+</head>
+<body>
+  <div id="main">
+    <img src="http://acre.freebase.com/api/trans/raw/guid/9202a8c04000641f800000000abf4b47">
+  </div>
+</body>
+</html>
