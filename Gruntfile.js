@@ -8,7 +8,7 @@ module.exports = function(grunt) {
            banner: '/*! <%= pkg.name %> \n by @spencermountain\n <%= grunt.template.today("yyyy-mm-dd") %> */\n',
          },
       dist: {
-        src: ['./*/index.js'],
+        src: ['./*/js/index.js'],
         dest: './index.js'
       }
     },
