@@ -1,0 +1,34 @@
+
+<html>
+<head>
+	<style>
+	body{
+		font-family:"Helvetica","Univers","Helvetica Neue",arial,helvetica,sans-serif;
+		font-size:22px;
+		color:#808080;
+	}
+	a{color:steelblue;
+	}
+	</style>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="../index.js"></script>
+	<script src="./js/index.js"></script>
+	<script>
+	$(document).ready(function(){
+
+		$("#input").type(function(s){
+			$("#results").waist(s);
+	  })
+
+		$.waist()
+	});
+	</script>
+</head>
+<body>
+<h2>the text, automatically sized for the box it is.</h2>
+<input id="input" style="width:200px; height:50px; font-size:20px;"/><br>
+<span style="width:100%; height:300px; border:1px solid grey; display:block;" class="waist" id="results">
+sometimes i feel ive got to du du get away
+</span>
+</body>
+</html>

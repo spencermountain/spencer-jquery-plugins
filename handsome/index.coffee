@@ -9,7 +9,7 @@
     options.normalize_to = options.normalize_to.length  if typeof options.normalize_to is "string"
     percentage = txt.length / options.normalize_to
     defaults =
-      duration: (options.duration or 1000) * percentage
+      duration: (options.duration or 1200) * percentage
       humanize: false
       resolution: txt.length
       cursor: false
@@ -25,11 +25,8 @@
 
     $.extend defaults, options
 
-  $.fn.handsome = (txt, options, callback) ->
-    options = options or {}
-    if typeof options is "function"
-      callback = options
-      options = {}
+  $.fn.handsome = (txt, options={}, callback=->) ->
+    txt= txt || this.text() || ""
     if options.human
       options = human_defaults(txt, options)
     else
@@ -44,6 +41,7 @@
     (doit = ->
       i++
       percentage = (i / steps) * 100
+      console.log percentage
       part = segment(txt, percentage)
       unless part is last
         part += "|"  if options.cursor
@@ -57,12 +55,12 @@
         callback()  if typeof callback is "function"
     )()
 
-  $.fn.climb = (options, callback) ->
-    options= options ? {}
+  $.fn.climb = (number, options={}, callback) ->
     delay = options.delay || 20
     callback= callback||->
     el=$(this)
-    num = el.text()
+    num = el.text() || number || 0
+    console.log options
     if parseInt(num)
       if options.average
         parts= bysize(num, options)
@@ -79,8 +77,9 @@
     )()
 
   bytime= (num, options) ->
+    console.log "hi"
     time = options.time || 1200
-    delay = options.delay || 20
+    delay = options.delay || 10
     steps = options.steps || time/delay
     if num < steps
       steps = num
@@ -99,6 +98,17 @@
       ideal_divisor = (average*1.5) / ideal_steps
     parts=(parseInt(i) for i in [0..num] by ideal_divisor)
     parts
+
+
+  $.handsome= (options={}, callback=->) ->
+    sel= options.sel || ".handsome"
+    $(sel).each () ->
+        $(this).handsome(null, options, callback)
+
+  $.climb= (options={}, callback=->) ->
+    sel= options.sel || ".climb"
+    $(sel).each () ->
+        $(this).climb(options, callback)
 
 
 ) jQuery

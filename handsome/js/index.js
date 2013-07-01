@@ -16,7 +16,7 @@
     }
     percentage = txt.length / options.normalize_to;
     defaults = {
-      duration: (options.duration || 1000) * percentage,
+      duration: (options.duration || 1200) * percentage,
       humanize: false,
       resolution: txt.length,
       cursor: false
@@ -35,11 +35,13 @@
   };
   $.fn.handsome = function(txt, options, callback) {
     var delay, doit, el, i, last, part, percentage, steps;
-    options = options || {};
-    if (typeof options === "function") {
-      callback = options;
+    if (options == null) {
       options = {};
     }
+    if (callback == null) {
+      callback = function() {};
+    }
+    txt = txt || this.text() || "";
     if (options.human) {
       options = human_defaults(txt, options);
     } else {
@@ -55,6 +57,7 @@
     return (doit = function() {
       i++;
       percentage = (i / steps) * 100;
+      console.log(percentage);
       part = segment(txt, percentage);
       if (part !== last) {
         if (options.cursor) {
@@ -78,13 +81,16 @@
       }
     })();
   };
-  $.fn.climb = function(options, callback) {
+  $.fn.climb = function(number, options, callback) {
     var delay, doit, el, i, num, parts;
-    options = options != null ? options : {};
+    if (options == null) {
+      options = {};
+    }
     delay = options.delay || 20;
     callback = callback || function() {};
     el = $(this);
-    num = el.text();
+    num = el.text() || number || 0;
+    console.log(options);
     if (parseInt(num)) {
       if (options.average) {
         parts = bysize(num, options);
@@ -105,8 +111,9 @@
   };
   bytime = function(num, options) {
     var delay, parts, steps, time, _i, _results;
+    console.log("hi");
     time = options.time || 1200;
-    delay = options.delay || 20;
+    delay = options.delay || 10;
     steps = options.steps || time / delay;
     if (num < steps) {
       steps = num;
@@ -120,7 +127,7 @@
     });
     return parts;
   };
-  return bysize = function(num, options) {
+  bysize = function(num, options) {
     var average, delay, i, ideal_divisor, ideal_steps, max, parts, time;
     average = options.average || 100;
     time = options.time || 1200;
@@ -141,4 +148,34 @@
     })();
     return parts;
   };
+  $.handsome = function(options, callback) {
+    var sel;
+    if (options == null) {
+      options = {};
+    }
+    if (callback == null) {
+      callback = function() {};
+    }
+    sel = options.sel || ".handsome";
+    return $(sel).each(function() {
+      return $(this).handsome(null, options, callback);
+    });
+  };
+  return $.climb = function(options, callback) {
+    var sel;
+    if (options == null) {
+      options = {};
+    }
+    if (callback == null) {
+      callback = function() {};
+    }
+    sel = options.sel || ".climb";
+    return $(sel).each(function() {
+      return $(this).climb(options, callback);
+    });
+  };
 })(jQuery);
+
+/*
+//@ sourceMappingURL=index.map
+*/
