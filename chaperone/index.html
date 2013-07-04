@@ -1,0 +1,73 @@
+<html>
+<head>
+  <style>
+  body{color:grey}
+  </style>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="./js/index.js"></script>
+  <script type="text/coffeescript">
+    root=module?||this
+    $ ->
+      chart= (sel, data=[]) ->
+        w = 600
+        h = 250
+        margin=20
+        root.y = d3.scale.linear().domain([0, 10]).range([0, h])
+        x = d3.scale.linear().domain([0, 10]).range([0, w])
+        svg = d3.select(sel).append("svg:svg").attr("height", h+margin).attr("width", w+margin)
+        .style("border","1px solid grey")
+        rect = svg.selectAll("rect").data(data).enter().append("rect")
+
+        rect.attr("x", (d, i) -> x i)
+        .attr("y", (d,i) -> root.y d)
+        .attr("height", (h/10)-2)
+        .attr("width", ((w/10)*2)-20)
+        .attr("fill-opacity", .7)
+        .style("fill", "steelblue")
+        .style("stroke", "grey")
+        .style("stroke-width", "1px")
+        rect
+
+      basic= ->
+          [0...10].map -> Math.floor(Math.random()*10)
+
+      update= (rect,fn) ->
+          data=fn
+          rect.data(data).enter()
+          rect.transition().duration(1200).attr("y", (d,i) -> root.y d)
+
+      fn2=basic
+      rect2=chart("#basic", fn2())
+      setInterval( ->
+        update(rect2,fn2())
+      , 2000)
+
+      fn=$.chaperone
+      rect=chart("#chaperone", fn(10))
+      setInterval( ->
+        update(rect,fn(10))
+      , 2000)
+
+      fn3=$.socialist
+      rect3=chart("#socialist", fn3(10))
+      setInterval( ->
+        update(rect3,fn3(10))
+      , 2000)
+
+  </script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.1.2/coffee-script.min.js"></script>
+</head>
+<body>
+  <h2>basic random</h2>
+  the squares sometimes overlap
+  <div id="basic"></div>
+  <h2>chaperone random</h2>
+  neighbours never touch, duplicates allowed at distance
+  <div id="chaperone"></div>
+  <h2>socialist random</h2>
+  only allow duplicates if all possible values have been used
+  <div id="socialist"></div>
+
+</body>
+</html>
