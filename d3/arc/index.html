@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title></title>
+  <style>
+  body{
+    font-family:"Helvetica","Univers","Helvetica Neue",arial,helvetica,sans-serif;
+    font-size:12px;
+    color:#808080;
+  }
+  a{color:steelblue;
+  }
+  </style>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="./coffeejs/index.js"></script>
+  <script>
+  $(document).ready(function(){
+
+    $("#results").arc([{value:25, title:"good"}, {value:75, title:"evil"}])
+    $("#update").click(function(){
+      var i=Math.floor(Math.random()*400)
+      $("#results").arc([{value:i, title:"good"}, {value:75, title:"evil"}])
+    })
+  });
+  </script>
+</head>
+<body>
+
+    <input type="button" value="update" id="update"/>
+    $("#results").arc([{value:25, title:"good"}, {value:75, title:"evil"}])<br/>
+    <p></p>
+    <span id="results"></span>
+
+</body>
+</html>
