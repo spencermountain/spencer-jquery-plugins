@@ -1,0 +1,16 @@
+
+%h2 hiiii
+%table{style:"width:500px;"}
+  %tr
+    %td
+      %input{type:"range", min:"1", max:"{{sum}}", value:"{{bars[0].value}}", style:"height:200px; width:20px; -webkit-appearance: slider-vertical;"}
+    %td
+      %input{type:"range", min:"1", max:"{{sum}}", value:"{{bars[1].value}}", style:"height:200px; width:20px; -webkit-appearance: slider-vertical;"}
+%svg
+  %g{transform:'translate(130,130)'}
+    {{#each bars}}
+    %text{"font-size": "12px"} {{sum}}
+    %rect{ y:"{{(i * 50)}}", x:"{{value}}",  height:"30", width:"{{w}}", style:"fill: {{color}}"}
+
+    {{/each}}
+

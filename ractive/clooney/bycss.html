@@ -1,0 +1,87 @@
+<html>
+<head>
+  <title></title>
+  <style>
+  body {
+  background: white;
+}
+
+.pageOption {
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
+}
+
+.option,.option img {
+  width: 100%;
+  height: 100%;
+}
+
+.option {
+  overflow: hidden;
+  position: absolute; /* arctan(27 / 40) = 34.01935deg
+   * need to skew by 90deg -34.01935deg = 55.98065deg
+   */
+
+-webkit-transform: skewX(-55.98deg);
+  -moz-transform: skewX(-55.98deg);
+  -o-transform: skewX(-55.98deg);
+  -ms-transform: skewX(-55.98deg);
+  transform: skewX(-55.98deg);
+}
+
+.option:first-child {
+  left: -.25em;
+
+  -webkit-transform-origin: 100% 0;
+  -moz-transform-origin: 100% 0;
+  -o-transform-origin: 100% 0;
+  -ms-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+}
+
+.option:last-child {
+  right: -.25em;
+
+  -webkit-transform-origin: 0 100%;
+  -moz-transform-origin: 0 100%;
+  -o-transform-origin: 0 100%;
+  -ms-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+
+
+.option img,.option:after {
+  -webkit-transform: skewX(55.98deg);
+  -moz-transform: skewX(55.98deg);
+  -o-transform: skewX(55.98deg);
+  -ms-transform: skewX(55.98deg);
+  transform: skewX(55.98deg);
+
+  -webkit-transform-origin: inherit;
+  -moz-transform-origin: inherit;
+  -o-transform-origin: inherit;
+  -ms-transform-origin: inherit;
+  transform-origin: inherit;
+}
+
+
+
+  </style>
+
+</head>
+<body>
+
+<div class='pageOption'>
+  <a href='#' class='option' >
+    <img src="https://www.googleapis.com/freebase/v1/image/en/drew_barrymore?mode=fillcropmid&maxwidth=300&maxheight=300">
+  </a>
+  <a href='#' >
+    <img src="https://www.googleapis.com/freebase/v1/image/en/toronto?mode=fillcropmid&maxwidth=300&maxheight=300">
+  </a>
+</div>
+
+</body>
+</html>
